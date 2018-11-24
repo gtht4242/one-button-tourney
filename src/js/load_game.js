@@ -22,7 +22,7 @@ class LoadGame extends Phaser.State {
         var scoreDash = this.game.add.text(this.game.world.width / 2 + 10, this.game.world.height / 2 + 75, '—');
         scoreDash.anchor.setTo(0.5, 0.5);
         scoreDash.fontSize = 60;
-        window.setTimeout(this.startBalloonMash.bind(this), 4000);
+        setTimeout(this.startBalloonMash.bind(this), 4000);
     }
     startBalloonMash() {
         // Start balloon mash state

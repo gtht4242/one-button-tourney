@@ -11,11 +11,24 @@ class Microgame extends Phaser.State {
         var player2Key = this.game.input.keyboard.addKey(player2Key);
         player2Key.onDown.add(callback, context);
     }
-    startTimeLimit(seconds, callback, context) {
-        // Start timer event for callback
-        var timeLimit = this.game.time.create();
-        timeLimit.add(seconds * 1000, callback, context);
-        timeLimit.start();
+    startTimeLimit(seconds) {
+        // Start microgame time limit
+        var graphics = this.game.add.graphics(0, 0);
+        graphics.lineStyle(1, 0xffff8c, 1);
+        graphics.beginFill(0xffff8c, 1);
+        graphics.drawRect(0, 0, this.game.world.width, 40);
+        var graphicsTexture = graphics.generateTexture();
+        graphics.destroy();
+        this.timeBar = this.game.add.sprite(0, 0, graphicsTexture);
+        this.timeTween = this.game.add.tween(this.timeBar);
+        this.timeTween.to({width: 0}, seconds * 1000);
+        this.timerCallback = setTimeout(this.startLoadGame.bind(this), seconds * 1000);
+        this.timeTween.start();
+    }
+    stopTimeLimit() {
+        // Stop the microgame time limit
+        clearTimeout(this.timerCallback);
+        this.timeTween.stop();
     }
     createBars() {
         // Create bar graphic to divide screen areas
@@ -36,6 +49,6 @@ class Microgame extends Phaser.State {
         hintText.strokeThickness = 7;
         var hintTween = this.game.add.tween(hintText);
         hintTween.to({x: this.game.world.width / 2, y: 20, fontSize: 30, strokeThickness: 5}, 250, Phaser.Easing.Linear.Out);
-        window.setTimeout(function() {hintTween.start();}, 2000);
+        setTimeout(function() {hintTween.start();}, 2000);
     }
 }

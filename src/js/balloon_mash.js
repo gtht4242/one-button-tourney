@@ -2,6 +2,7 @@ class BalloonMash extends Microgame {
     // 1 - Balloon Mash
     // Mash the button to pop the balloon
     create() {
+        this.startTimeLimit(6);
         this.createBars();
         this.player1Key = this.game.input.keyboard.addKey(this.game.player1Key);
         this.player1Key.onDown.add(this.incrementBalloon1, this);
@@ -22,10 +23,11 @@ class BalloonMash extends Microgame {
             this.player1Balloon.loadTexture('spritesheet', '1_balloonb_' + (this.player1BalloonCount / 2));
         }
         if (this.player1BalloonCount >= 30) {
+            this.stopTimeLimit();
             this.player1Key.reset();
             this.player2Key.reset();
             this.game.player1Score++;
-            window.setTimeout(this.startLoadGame.bind(this), 2000);
+            setTimeout(this.startLoadGame.bind(this), 2000);
         }
     }
     incrementBalloon2() {
@@ -35,10 +37,11 @@ class BalloonMash extends Microgame {
             this.player2Balloon.loadTexture('spritesheet', '1_balloonr_' + (this.player2BalloonCount / 2));
         }
         if (this.player2BalloonCount >= 30) {
+            this.stopTimeLimit();
             this.player1Key.reset();
             this.player2Key.reset();
             this.game.player2Score++;
-            window.setTimeout(this.startLoadGame.bind(this), 2000);
+            setTimeout(this.startLoadGame.bind(this), 2000);
         }
     }
 }
