@@ -5,6 +5,7 @@ class Game extends Phaser.Game {
         this.state.add('Load', Load);
         this.state.add('Menu', Menu);
         this.state.add('LoadGame', LoadGame);
+        this.state.add('BalloonMash', BalloonMash);
         this.state.start('Boot');
     }
 }

@@ -47,11 +47,11 @@ class Menu extends Phaser.State {
             string = string.toUpperCase();
             if (this.player1Text.text === '') {
                 this.player1Text.text = string;
-                this.game.player1Key = event.charCode;
+                this.game.player1Key = string.charCodeAt(0);
                 this.player1Ready = true;
             } else if (this.player2Text.text === '' && this.player1Text.text !== string) {
                 this.player2Text.text = string;
-                this.game.player2Key = event.charCode;
+                this.game.player2Key = string.charCodeAt(0);
                 this.player2Ready = true;
                 this.startText.visible = true;
             }
