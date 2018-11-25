@@ -26,8 +26,7 @@ class BalloonMash extends Microgame {
             this.stopTimeLimit();
             this.player1Key.reset();
             this.player2Key.reset();
-            this.game.player1Score++;
-            setTimeout(this.startLoadGame.bind(this), 2000);
+            setTimeout(this.startLoadGame.bind(this, true, false), 2000);
         }
     }
     incrementBalloon2() {
@@ -40,8 +39,7 @@ class BalloonMash extends Microgame {
             this.stopTimeLimit();
             this.player1Key.reset();
             this.player2Key.reset();
-            this.game.player2Score++;
-            setTimeout(this.startLoadGame.bind(this), 2000);
+            setTimeout(this.startLoadGame.bind(this, false, true), 2000);
         }
     }
 }

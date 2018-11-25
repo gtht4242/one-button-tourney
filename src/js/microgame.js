@@ -1,8 +1,8 @@
 class Microgame extends Phaser.State {
     // Includes common functions used by all microgame states
-    startLoadGame() {
-        // Start load game state
-        this.game.state.start('LoadGame');
+    startLoadGame(player1Win, player2Win) {
+        // Start load game state and pass win/loss data
+        this.game.state.start('LoadGame', true, false, player1Win, player2Win);
     }
     addOnDown(player1Key, player2Key, callback, context) {
         // Add onDown callback to all player keys
@@ -22,12 +22,14 @@ class Microgame extends Phaser.State {
         this.timeBar = this.game.add.sprite(0, 0, graphicsTexture);
         this.timeTween = this.game.add.tween(this.timeBar);
         this.timeTween.to({width: 0}, seconds * 1000);
-        this.timerCallback = setTimeout(this.startLoadGame.bind(this), seconds * 1000);
+        this.timerCallback = this.game.time.create();
+        this.timerCallback.add(seconds * 1000, this.startLoadGame, this);
+        this.timerCallback.start();
         this.timeTween.start();
     }
     stopTimeLimit() {
         // Stop the microgame time limit
-        clearTimeout(this.timerCallback);
+        this.timerCallback.destroy();
         this.timeTween.stop();
     }
     createBars() {
