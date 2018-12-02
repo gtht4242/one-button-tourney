@@ -27,11 +27,11 @@ class LoadGame extends Phaser.State {
         player2ScoreText.anchor.setTo(0.5, 0.5);
         player2ScoreText.fontSize = 60;
         var player1ScoreTweenGrow = this.game.add.tween(player1ScoreText);
-        player1ScoreTweenGrow.to({fontSize: 150}, 1000, Phaser.Easing.Circular.Out);
+        player1ScoreTweenGrow.to({fontSize: 150}, 1000, Phaser.Easing.Circular.Out, false, 200);
         var player1ScoreTweenShrink = this.game.add.tween(player1ScoreText);
         player1ScoreTweenShrink.to({fontSize: 60}, 1000, Phaser.Easing.Circular.Out);
         var player2ScoreTweenGrow = this.game.add.tween(player2ScoreText);
-        player2ScoreTweenGrow.to({fontSize: 150}, 1000, Phaser.Easing.Circular.Out);
+        player2ScoreTweenGrow.to({fontSize: 150}, 1000, Phaser.Easing.Circular.Out, false, 200);
         var player2ScoreTweenShrink = this.game.add.tween(player2ScoreText);
         player2ScoreTweenShrink.to({fontSize: 60}, 1000, Phaser.Easing.Circular.Out);
         if (this.player1Win) {
